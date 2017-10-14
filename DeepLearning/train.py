@@ -5,7 +5,7 @@ Deep Learning Class
 import tensorflow as tf
 class train:
     @staticmethod
-    def accuracy(session,outputLayer,xBatch,yBatch,data,label,keep_prob,isKeepProb=False):
+    def accuracy(session,outputLayer,xBatch,yBatch,data,label,*keep_prob,isKeepProb=False):
         """
         params
             session : session that is runing
