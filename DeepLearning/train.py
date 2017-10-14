@@ -5,30 +5,30 @@ Deep Learning Class
 import tensorflow as tf
 class train:
     @staticmethod
-    def accuracy(predict,label,xBatch=xs,yBatch=ys,keep_prob=keep_prob,isKeepProb=False):
+    def accuracy(session,outputLayer,xBatch,yBatch,data,label,keep_prob,isKeepProb=False):
         """
         params
-            predict : input data
-            label : lable of input data
-            xBatch : feed_dict associated with predict
+            session : session that is runing
+            outputLayer : the prediction layer
+            xBatch : feed_dict associated with data
             yBatch : feed_dict associated with label
+            data : input data
+            label : lable of input data
             keep_prob : dropout ratio
             isKeepProb : if there is a dropout parameter or not
         return
             accuracy of prediction
-        ***run in a tf.Session()
         """
-        global prediction
         if isKeepProb:
-            y_pre = sess.run(prediction, feed_dict={xBatch:predict,keep_prob:1})
+            y_pre = session.run(outputLayer, feed_dict={xBatch:data,keep_prob:1})
             correct_prediction = tf.equal(tf.argmax(y_pre,1),tf.argmax(label,1))
             accuracy = tf.reduce_mean(tf.cast(correct_prediction,tf.float32))
-            result = sess.run(accuracy,feed_dict={xBatch:predict,yBatch:label,keep_prob:1})
+            result = accuracy.eval({xBatch:data,yBatch:label,keep_prob:1})
         else:
-            y_pre = sess.run(prediction, feed_dict={xBatch:predict})
+            y_pre = session.run(outputLayer, feed_dict={xBatch:data})
             correct_prediction = tf.equal(tf.argmax(y_pre,1),tf.argmax(label,1))
             accuracy = tf.reduce_mean(tf.cast(correct_prediction,tf.float32))
-            result = sess.run(accuracy,feed_dict={xBatch:predict,yBatch:label})
+            result = accuracy.eval({xBatch:data,yBatch:label})
         return result
     @staticmethod
     def crossEntropy(prediction,label):
