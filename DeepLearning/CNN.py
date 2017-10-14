@@ -15,8 +15,10 @@ class cnn:
                  FCName='FC'
                 ):
         """
-        params:x is input data
-        return:None
+        params
+            x : input data
+        return
+            None
         """
         self.inputData=x#input data is 4dims [batch,in_height,in_width,in_channels]
         self.convName=layerName+convName
@@ -24,12 +26,14 @@ class cnn:
         self.FCName=layerName+FCName
     def conv(self,ksize,in_c,knums,stride,padding='SAME',symmetric=True):
         """
-        params:ksize is convolution kernel size,a number when kernel is symmetric,a list when kernel is asymmetric
-               in_c is input channels number
-               knums is kernel number
-               stride is filter stride
-               symmetric shows is kernel symmetric
-        return:convolution feature map
+        params
+            ksize : convolution kernel size,a number when kernel is symmetric,a list when kernel is asymmetric
+            in_c : input channels number
+            knums : kernel number
+            stride : filter stride
+            symmetric : is kernel symmetric
+        return
+            convolution feature map
         """
         assert ((type(in_c) is int)and(type(knums) is int)and(type(stride) is int)and(type(padding) is str)),\
         "input data type(s) is(are) wrong"
@@ -48,11 +52,13 @@ class cnn:
         return activation
     def pooling(self,ksize,stride,method='max',padding='SAME'):
         """
-        params:ksize is pool kernel size
-               stride is filter stride
-               method is pooling method
-               padding is padding method
-        return:pooling feature map
+        params
+            ksize : pool kernel size
+            stride : filter stride
+            method : pooling method
+            padding : padding method
+        return
+            pooling feature map
         """
         assert ((type(ksize) is int)and(type(stride) is int)and(type(method) is str)and(type(padding) is str)),\
         "input data type(s) is(are) wrong"
@@ -66,11 +72,13 @@ class cnn:
         return pool
     def FC(self,in_num,out_num,isFlatten=False,isSoftmax=False):
         """
-        params:in_num is input number of full connection layer
-               out_num is output number of full connection layer
-               isFlatten shows if input data need to be flatten
-               isSoftmax shows is output activation is softmax
-        return:full connection layer
+        params
+            in_num : input number of full connection layer
+            out_num : output number of full connection layer
+            isFlatten : if input data need to be flatten
+            isSoftmax : is output activation is softmax
+        return
+            full connection layer
         """
         assert ((type(in_num) is int)and(type(out_num) is int)),\
         "input data type(s) is(are) wrong"
@@ -87,8 +95,10 @@ class cnn:
         return output
     def dropOut(self,keep_prob=1):
         """
-        params:keep_prob is dropout ratio
-        return:dropout layer
+        params
+            keep_prob : dropout ratio
+        return
+            dropout layer
         """
         assert ((type(keep_prob) is int)or(type(keep_prob) is float))or(keep_prob.dtype == (tf.float32 or tf.float16 or tf.float64)),"input data type(s) is(are) wrong"
         dropout = tf.nn.dropout(self.inputData,keep_prob)
