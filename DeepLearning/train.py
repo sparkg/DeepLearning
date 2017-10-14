@@ -1,3 +1,8 @@
+"""
+Deep Learning Class
+@author: Gaoruiqi
+"""
+import tensorflow
 class train:
     @staticmethod
     def accuracy(predict,label,xBatch=xs,yBatch=ys,keep_prob=keep_prob,isKeepProb=False):
