@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Deep Learning Cnn Class
+MNIST example
 
 @author: Gaoruiqi
 """
